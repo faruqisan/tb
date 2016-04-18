@@ -3,6 +3,7 @@ function scroll(id){
 }
 $(document).ready(function(){
   $('.parallax').parallax();
-  $(".dropdown-button").dropdown();
-  $('.modal-trigger').leanModal()
+  $(".dropdown-button").dropdown({belowOrigin: true});
+  $('.modal-trigger').leanModal();
+  $(".button-collapse").sideNav();
 });

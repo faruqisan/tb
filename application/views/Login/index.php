@@ -3,17 +3,25 @@
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/css/materialize.min.css"  media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>TB</title>
+    <title>TB Smart</title>
   </head>
   <body class="grey lighten-3">
+    <header>
+      <?php $loginResult=$this->session->flashdata('loginResult'); ?>
+      <?php if(isset($loginResult)) {?>
+        <script type="text/javascript">
+          alert("<?php echo $this->session->flashdata('loginResult'); ?>");
+        </script>
+      <?php } ?>
+    </header>
     <div class="parallax-container" style="height:100vh">
-        <div class="parallax" ><img src=""></div>
+        <div class="parallax" ><img src="<?php echo base_url(); ?>assets/img/parallax-bg.jpg"></div>
         <div class="row">
           <div class="col l12 s12">
             <div class="row">
               <div class="col l12 s12">
-                <h1 class="center-align"><b>App Title</b></h1><br>
-                <h4 class="center-align" style="margin-top:-3%"><b>Tagline</b></h4>
+                <h1 class="center-align"><b>TB Smart</b></h1><br>
+                <h4 class="center-align" style="margin-top:-25px"><b>Mari Lawan Tuberkolosis</b></h4>
               </div>
             </div>
           </div>
@@ -22,7 +30,7 @@
       <div class="section red lighten-2">
         <div class="row">
           <div class="col l4 s12 offset-l4" >
-            <div class="card hoverable"style="margin-top:-28.5%">
+            <div class="card hoverable"style="margin-top:-100px">
               <form action="Login/doLogin" method="post">
                 <div class="card-content center">
                   <!-- go to down button -->
