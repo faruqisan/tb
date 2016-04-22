@@ -3,7 +3,7 @@
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets/css/materialize.min.css"  media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>TB Smart | Pasien</title>
+    <title>TB Smart | Pasien | Profile</title>
   </head>
   <body class="grey lighten-3">
     <header>
@@ -22,12 +22,12 @@
                 </a>
               </li>
               <ul id="dropdownProfile" class="dropdown-content">
-                <li><a href="<?php echo base_url('Pasien/profile'); ?>">Profile</a></li>
+                <li><a href="<?php echo base_url('Pasien'); ?>">Beranda</a></li>
                 <li><a href="<?php echo base_url('Login'); ?>/doLogout">Logout</a></li>
               </ul>
             </ul>
             <ul class="side-nav" id="mobile-demo">
-              <li><a href="<?php echo base_url('Pasien/profile'); ?>">Profile</a></li>
+              <li><a href="<?php echo base_url('Pasien'); ?>">Beranda</a></li>
               <li><a href="<?php echo base_url('Login'); ?>/doLogout">Logout</a></li>
             </ul>
           </div>
@@ -35,7 +35,33 @@
       </div>
     </header>
     <main>
-      <!--<input type="file" accept="video/*;capture=camcorder">-->
+      <div class="row">
+        <div class="col l12 s12">
+          <h4 class="center-align"><?php echo $this->session->userdata('login')['firstname'] ?>'s Profile</h4>
+        </div>
+      </div>
+      <div class="container">
+
+        <?php if($listUserVideo!=null){ ?>
+          <?php foreach($listUserVideo as $row){ ?>
+            <div class="row">
+              <div class="col l12 s12">
+                <div class="card">
+                  <div class="card-content">
+                    <video controls style="width:100% !important;height:auto !important;">
+                      <source src="<?php echo base_url().$row->video_link; ?>" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php } ?>
+        <?php }else{ ?>
+          <h5 class="center-align">Belum Ada Video</h5>
+        <?php } ?>
+
+      </div>
+
       <div class="fixed-action-btn horizontal" style="bottom: 15px; right: 15px;">
         <a class="btn-floating btn-large teal">
           <i class="large material-icons">menu</i>
@@ -45,7 +71,9 @@
         </ul>
       </div>
       <div id="modalVideo" class="modal bottom-sheet">
-        <form action="Pasien/submitVideo" method="post" enctype="multipart/form-data">
+        <?php $attributes = array('enctype' => 'multipart/form-data');?>
+        <?php echo form_open('Pasien/submitVideo', $attributes); ?>
+        <!--<form action="submitVideo" method="post" enctype="multipart/form-data">-->
           <div class="modal-content">
             <div class="row">
               <h4 class="center">Upload Video</h4>

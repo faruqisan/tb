@@ -15,7 +15,7 @@
       <?php } ?>
     </header>
     <div class="parallax-container" style="height:100vh">
-        <div class="parallax" ><img src="<?php echo base_url(); ?>assets/img/parallax-bg.jpg"></div>
+        <div class="parallax" ><img src="<?php echo base_url(); ?>assets/img/parallax-bg.png"></div>
         <div class="row">
           <div class="col l12 s12">
             <div class="row">
@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <div class="section red lighten-2">
+      <div class="section blue darken-2">
         <div class="row">
           <div class="col l4 s12 offset-l4" >
             <div class="card hoverable"style="margin-top:-100px">

@@ -49,6 +49,19 @@ class Login extends CI_Controller{
         break;
         case '2':
         #Admin
+        $sessionData = array(
+          'privilage'=>'Admin',
+  				'id'=>$loginResult[0]->id,
+  				'email'=>$loginResult[0]->email,
+          'firstname'=>$userData[0]->firstname,
+          'lastname'=>$userData[0]->lastname,
+          'dob'=>$userData[0]->dob,
+          'address'=>$userData[0]->address,
+          'phone'=>$userData[0]->phone,
+  				'loginTime' => date('Y-m-d h:i:s', time())
+  			);
+        $this->session->set_userdata('login',$sessionData);
+        redirect('Admin');
         break;
         case '3':
         #dokter

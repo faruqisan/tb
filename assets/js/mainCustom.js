@@ -6,4 +6,5 @@ $(document).ready(function(){
   $(".dropdown-button").dropdown({belowOrigin: true});
   $('.modal-trigger').leanModal();
   $(".button-collapse").sideNav();
+  $('.tooltipped').tooltip({delay: 50});
 });
