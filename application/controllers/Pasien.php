@@ -3,6 +3,9 @@ date_default_timezone_set('Asia/Jakarta');
 class Pasien extends CI_Controller{
   function __construct(){
     parent::__construct();
+    if($this->session->userdata('login')['privilage'] != "Pasien" ){
+      redirect('Login');
+		}
     $this->load->Model('Video_Model');
   }
   public function index(){
@@ -26,13 +29,9 @@ class Pasien extends CI_Controller{
       if (!$this->upload->do_upload("video")) {
         $this->session->set_flashdata('uploadResult','Video gagal di Upload');
         redirect('Pasien');
-         //$error = array('error' => $this->upload->display_errors());
-         //print_r($error);
       }else {
          //state jika berhasil
          $upload_data = $this->upload->data();
-         //$videoPath = $upload_data['full_path'];
-         //$videoPath = $this->db->escape($videoPath);
          $fileName = $upload_data['file_name'];
          $data = array(
            'id_user'=>$uploaderId,
@@ -44,11 +43,17 @@ class Pasien extends CI_Controller{
            $this->session->set_flashdata('uploadResult','Video Berhasil Di Upload');
            redirect('Pasien/profile');
          }else{
-           //echo "Video Uploaded, but cant save to db";
            redirect('Pasien');
          }
       }
     }
+  }
+  public function deleteVideo(){
+    $idVideo = $this->input->post('id');
+		$result = $this->Video_Model->deleteVideo($idVideo);
+    $response = array('status'=>$result);
+		header("Content-Type: application/json");
+		echo json_encode($response);
   }
 }
 ?>

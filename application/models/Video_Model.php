@@ -13,7 +13,7 @@ class Video_Model extends CI_Model{
     }
   }
   function getAllVideoById($userId){
-    $query = $this->db->order_by('upload_time', 'DESC')->get_where('video', array('id_user' => $userId));
+    $query = $this->db->order_by('upload_time', 'DESC')->get_where('vw_user_video', array('id_user' => $userId));
     if ($query->num_rows() > 0){
       return $query->result();
     }else{
@@ -96,6 +96,15 @@ class Video_Model extends CI_Model{
         return true;
     } else {
         return false;
+    }
+  }
+
+  function deleteVideo($id){
+    $query = $this->db->delete('video', array('id' => $id));
+    if($this->db->affected_rows() == 1){
+      return true;
+    }else{
+      return false;
     }
   }
 

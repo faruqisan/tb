@@ -48,9 +48,46 @@
               <div class="col l12 s12">
                 <div class="card">
                   <div class="card-content">
-                    <video controls style="width:100% !important;height:auto !important;">
-                      <source src="<?php echo base_url().$row->video_link; ?>" type="video/mp4">
-                    </video>
+                    <div class="row">
+                      <div class="col s12">
+                        <?php if($row->approved_status == 'ACCEPTED'){ ?>
+                          <p>Status Video : <b class="green-text">DITERIMA</b> Oleh : <?php echo $row->email ?></p>
+                        <?php }else if($row->approved_status == 'DECLINED'){ ?>
+                          <p class="red-text"><b>DITOLAK</b> Oleh : <?php echo $row->email ?></p>
+                        <?php } ?>
+                      </div>
+                      <div class="col s12">
+                        <p>Di unggah pada : <b><?php echo $row->upload_time ?></b></p>
+                      </div>
+                      <div class="col s12">
+                        <p>Keterangan : <b><?php echo $row->keterangan ?></b></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col l12 s12">
+                        <video controls style="width:100% !important;height:auto !important;">
+                          <source src="<?php echo base_url().$row->video_link; ?>" type="video/mp4">
+                        </video>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-action grey lighten-2">
+                    <div class="row" style="margin-top:-50px">
+                      <a href="#modal<?php echo $row->id ?>delete" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">delete</i></a>
+                      <div id="modal<?php echo $row->id ?>delete" class="modal">
+                        <div class="modal-content">
+                          <h4>Hapus Video</h4>
+                          <div class="row">
+                            <div class="col l12 s12">
+                              <p>Yakin Hapus Video Ini ?</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button onclick="deleteVideo(<?php echo $row->id ?>)" class=" modal-action modal-close waves-effect waves-red btn-flat">Hapus</button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -100,7 +137,6 @@
     <?php $uploadResult=$this->session->flashdata('uploadResult'); ?>
     <?php if(isset($uploadResult)) {?>
       <script type="text/javascript">
-        //alert("<?php echo $this->session->flashdata('uploadResult'); ?>");
         Materialize.toast('<?php echo $this->session->flashdata('uploadResult'); ?>', 4000);
       </script>
     <?php } ?>

@@ -3,6 +3,9 @@
 class Admin extends CI_Controller{
   function __construct(){
     parent::__construct();
+    if($this->session->userdata('login')['privilage'] != "Admin" ){
+      redirect('Login');
+		}
     $this->load->Model('Video_Model');
   }
   function index(){
