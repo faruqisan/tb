@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2016 at 11:25 AM
+-- Generation Time: Apr 24, 2016 at 06:36 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.5.19
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `id_privilage`) VALUES
-(1, 'dev@tb', '5e8edd851d2fdfbd7415232c67367cc3', 1),
+(1, 'defaultApprover', '5e8edd851d2fdfbd7415232c67367cc3', 2),
 (2, 'pasien@tb', 'f5c25a0082eb0748faedca1ecdcfb131', 1),
 (3, 'developer@tb', '5e8edd851d2fdfbd7415232c67367cc3', 1),
 (4, 'admin@tb', '21232f297a57a5a743894a0e4a801fc3', 2);
@@ -99,9 +99,9 @@ CREATE TABLE IF NOT EXISTS `video` (
   `video_link` varchar(255) NOT NULL,
   `upload_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `approved_status` enum('NEW','DECLINED','ACCEPTED','') DEFAULT 'NEW',
-  `approver_id` int(11) DEFAULT NULL,
+  `approver_id` int(11) DEFAULT '1',
   `keterangan` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `video`
@@ -109,9 +109,32 @@ CREATE TABLE IF NOT EXISTS `video` (
 
 INSERT INTO `video` (`id`, `id_user`, `video_link`, `upload_time`, `approved_status`, `approver_id`, `keterangan`) VALUES
 (1, 3, 'video/developer@tb/20160420_013758.mp4', '2016-04-22 08:16:08', 'DECLINED', 4, 'kurang maksimal'),
-(2, 3, 'video/developer@tb/20160420_013558.mp4', '2016-04-22 08:16:25', 'DECLINED', 4, 'bukan orang asli'),
 (3, 3, 'video/developer@tb/20160421_014124.mp4', '2016-04-22 08:29:32', 'ACCEPTED', 4, 'Bagus lanjutkan'),
-(4, 3, 'video/developer@tb/20160421_0141241.mp4', '2016-04-22 08:30:23', 'ACCEPTED', 4, 'Tinggal 2 obat lagi');
+(4, 3, 'video/developer@tb/20160421_0141241.mp4', '2016-04-22 08:30:23', 'ACCEPTED', 4, 'Tinggal 2 obat lagi'),
+(6, 2, 'video/pasien@tb/20160424_131517.mp4', '2016-04-24 06:16:30', 'NEW', 1, NULL),
+(8, 2, 'video/pasien@tb/trim_E9C905E7-6286-46D1-A4AB-26CF53D90B771.MOV', '2016-04-24 16:32:42', 'DECLINED', 4, 'Salah pencet');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `video_comment`
+--
+
+CREATE TABLE IF NOT EXISTS `video_comment` (
+`id` int(11) NOT NULL,
+  `video_id` int(11) NOT NULL,
+  `commenter_id` int(11) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `video_comment`
+--
+
+INSERT INTO `video_comment` (`id`, `video_id`, `commenter_id`, `comment`, `comment_date`) VALUES
+(1, 8, 2, 'tes', '2016-04-24 14:21:38'),
+(2, 4, 2, 'apa apaan ini !', '2016-04-24 16:01:10');
 
 -- --------------------------------------------------------
 
@@ -127,6 +150,19 @@ CREATE TABLE IF NOT EXISTS `vw_acc_video` (
 ,`video_link` varchar(255)
 ,`upload_time` timestamp
 ,`keterangan` varchar(255)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vw_comment`
+--
+CREATE TABLE IF NOT EXISTS `vw_comment` (
+`id` int(11)
+,`video_id` int(11)
+,`firstname` varchar(255)
+,`lastname` varchar(255)
+,`comment` varchar(255)
+,`comment_date` timestamp
 );
 -- --------------------------------------------------------
 
@@ -160,11 +196,34 @@ CREATE TABLE IF NOT EXISTS `vw_new_video` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vw_user_video`
+--
+CREATE TABLE IF NOT EXISTS `vw_user_video` (
+`id` int(11)
+,`id_user` int(11)
+,`video_link` varchar(255)
+,`upload_time` timestamp
+,`keterangan` varchar(255)
+,`email` varchar(255)
+,`approved_status` enum('NEW','DECLINED','ACCEPTED','')
+);
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vw_acc_video`
 --
 DROP TABLE IF EXISTS `vw_acc_video`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_acc_video` AS select `video`.`id` AS `id`,`video`.`id_user` AS `id_user`,`user_information`.`firstname` AS `firstname`,`user_information`.`lastname` AS `lastname`,`user`.`email` AS `email`,`video`.`video_link` AS `video_link`,`video`.`upload_time` AS `upload_time`,`video`.`keterangan` AS `keterangan` from ((`video` join `user`) join `user_information`) where ((`video`.`id_user` = `user`.`id`) and (`video`.`id_user` = `user_information`.`id_user`) and (`video`.`approved_status` = 'ACCEPTED'));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_comment`
+--
+DROP TABLE IF EXISTS `vw_comment`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_comment` AS select `video_comment`.`id` AS `id`,`video_comment`.`video_id` AS `video_id`,`user_information`.`firstname` AS `firstname`,`user_information`.`lastname` AS `lastname`,`video_comment`.`comment` AS `comment`,`video_comment`.`comment_date` AS `comment_date` from (`video_comment` join `user_information`) where (`video_comment`.`commenter_id` = `user_information`.`id_user`);
 
 -- --------------------------------------------------------
 
@@ -183,6 +242,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vw_new_video`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_new_video` AS select `video`.`id` AS `id`,`video`.`id_user` AS `id_user`,`user_information`.`firstname` AS `firstname`,`user_information`.`lastname` AS `lastname`,`user`.`email` AS `email`,`video`.`video_link` AS `video_link`,`video`.`upload_time` AS `upload_time` from ((`video` join `user`) join `user_information`) where ((`video`.`id_user` = `user`.`id`) and (`video`.`id_user` = `user_information`.`id_user`) and (`video`.`approved_status` = 'NEW'));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vw_user_video`
+--
+DROP TABLE IF EXISTS `vw_user_video`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_user_video` AS select `video`.`id` AS `id`,`video`.`id_user` AS `id_user`,`video`.`video_link` AS `video_link`,`video`.`upload_time` AS `upload_time`,`video`.`keterangan` AS `keterangan`,`user`.`email` AS `email`,`video`.`approved_status` AS `approved_status` from (`video` join `user`) where (`video`.`approver_id` = `user`.`id`);
 
 --
 -- Indexes for dumped tables
@@ -213,6 +281,12 @@ ALTER TABLE `video`
  ADD PRIMARY KEY (`id`), ADD KEY `id_user` (`id_user`,`approver_id`), ADD KEY `approver_id` (`approver_id`);
 
 --
+-- Indexes for table `video_comment`
+--
+ALTER TABLE `video_comment`
+ ADD PRIMARY KEY (`id`), ADD KEY `video_id` (`video_id`,`commenter_id`), ADD KEY `commenter_id` (`commenter_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -230,7 +304,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `video`
 --
 ALTER TABLE `video`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `video_comment`
+--
+ALTER TABLE `video_comment`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
@@ -253,6 +332,13 @@ ADD CONSTRAINT `user_information_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `use
 ALTER TABLE `video`
 ADD CONSTRAINT `video_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`),
 ADD CONSTRAINT `video_ibfk_2` FOREIGN KEY (`approver_id`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `video_comment`
+--
+ALTER TABLE `video_comment`
+ADD CONSTRAINT `video_comment_ibfk_1` FOREIGN KEY (`video_id`) REFERENCES `video` (`id`),
+ADD CONSTRAINT `video_comment_ibfk_2` FOREIGN KEY (`commenter_id`) REFERENCES `user` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
