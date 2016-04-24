@@ -51,43 +51,29 @@
               <div class="col l12 s12">
                 <div class="card">
                   <div class="card-content">
-                    <div class="row">
-                      <div class="col s12">
-                        <a href="<?php echo $row->id_user ?>"><?php echo ucfirst($row->firstname).' '.ucfirst($row->lastname) ?></a>
-                      </div>
-                      <div class="col s12">
-                        <p><?php echo $row->upload_time ?></p>
-                      </div>
+                    <div class="chip">
+                      <img src="<?php echo base_url(); ?>assets/img/profile.jpg" alt="Contact Person">
+                      <?php echo ucfirst($row->firstname).' '.ucfirst($row->lastname) ?>
                     </div>
+                    <i class="material-icons right activator">more_vert</i>
+                  </div>
+                  <div class="card-image">
+                    <video class="responsive-video" controls>
+                      <source src="<?php echo base_url().$row->video_link; ?>">
+                    </video>
+                  </div>
+                  <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Informasi<i class="material-icons right">close</i></span>
                     <div class="row">
                       <div class="col l12 s12">
-                        <video controls style="width:100% !important;height:auto !important;">
-                          <source src="<?php echo base_url().$row->video_link; ?>" type="video/mp4">
-                        </video>
+                        <p>Di unggah pada : <b><?php echo $row->upload_time ?></b></p>
                       </div>
                     </div>
                   </div>
                   <div class="card-action grey lighten-2">
-                    <div class="row" style="margin-top:-50px">
-                      <div class="col l6 s6">
-                        <a href="#modal<?php echo $row->id ?>tolak" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">close</i></a>
-                        <div id="modal<?php echo $row->id ?>tolak" class="modal">
-                          <div class="modal-content">
-                            <h4>Tolak Video</h4>
-                            <div class="row">
-                              <div class="input-field col l12 s12">
-                                <input type="text" id="keteranganTolak<?php echo $row->id ?>"></input>
-                                <label for="keteranganTolak<?php echo $row->id ?>">Keterangan</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button onclick="declineVideo(<?php echo $row->id ?>)" class=" modal-action modal-close waves-effect waves-red btn-flat">Tolak</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col l6 s6">
-                        <a href="#modal<?php echo $row->id ?>terima" class="modal-trigger btn-floating btn-large waves-effect waves-light teal right"><i class="material-icons">check</i></a>
+                    <div class="row">
+                      <div class="col l6 s12">
+                        <a style="width:100%" href="#modal<?php echo $row->id ?>terima" class="white-text modal-trigger waves-effect waves-light btn"><i class="material-icons left">check</i>Terima</a>
                         <div id="modal<?php echo $row->id ?>terima" class="modal">
                           <div class="modal-content">
                             <h4>Terima Video</h4>
@@ -100,6 +86,25 @@
                           </div>
                           <div class="modal-footer">
                             <button onclick="acceptVideo(<?php echo $row->id ?>)" class=" modal-action modal-close waves-effect waves-green btn-flat">Terima</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col l6 s12">
+                        <a style="width:100%" href="#modal<?php echo $row->id ?>tolak" class="white-text modal-trigger waves-effect waves-light btn red lighten-2"><i class="material-icons left">close</i>Tolak</a>
+                        <div id="modal<?php echo $row->id ?>tolak" class="modal">
+                          <div class="modal-content">
+                            <h4>Tolak Video</h4>
+                            <div class="row">
+                              <div class="input-field col l12 s12">
+                                <input type="text" id="keteranganTolak<?php echo $row->id ?>"></input>
+                                <label for="keteranganTolak<?php echo $row->id ?>">Keterangan</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button onclick="declineVideo(<?php echo $row->id ?>)" class=" modal-action modal-close waves-effect waves-red btn-flat">Tolak</button>
                           </div>
                         </div>
                       </div>

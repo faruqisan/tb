@@ -51,29 +51,32 @@
               <div class="col l12 s12">
                 <div class="card">
                   <div class="card-content">
-                    <div class="row">
-                      <div class="col s12">
-                        <a href="<?php echo $row->id_user ?>"><?php echo ucfirst($row->firstname).' '.ucfirst($row->lastname) ?></a>
-                      </div>
-                      <div class="col s12">
-                        <p><?php echo $row->upload_time ?></p>
-                      </div>
-                      <div class="col s12">
-                        <p>Keterangan : <b><?php echo $row->keterangan ?></b></p>
-                      </div>
+                    <div class="chip">
+                      <img src="<?php echo base_url(); ?>assets/img/profile.jpg" alt="Contact Person">
+                      <?php echo ucfirst($row->firstname).' '.ucfirst($row->lastname) ?>
                     </div>
+                    <i class="material-icons right activator">more_vert</i>
+                  </div>
+                  <div class="card-image">
+                    <video class="responsive-video" controls>
+                      <source src="<?php echo base_url().$row->video_link; ?>">
+                    </video>
+                  </div>
+                  <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Informasi<i class="material-icons right">close</i></span>
                     <div class="row">
                       <div class="col l12 s12">
-                        <video controls style="width:100% !important;height:auto !important;">
-                          <source src="<?php echo base_url().$row->video_link; ?>" type="video/mp4">
-                        </video>
+                        <p>Di unggah pada : <b><?php echo $row->upload_time ?></b></p>
+                      </div>
+                      <div class="col l12 s12">
+                        <p>Keterangan : <b><?php echo $row->keterangan ?></b></p>
                       </div>
                     </div>
                   </div>
                   <div class="card-action grey lighten-2">
-                    <div class="row" style="margin-top:-50px">
-                      <div class="col l12 s12">
-                        <a href="#modal<?php echo $row->id ?>tolak" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">close</i></a>
+                    <div class="row">
+                      <div class="col l6 s12">
+                        <a style="width:100%" href="#modal<?php echo $row->id ?>tolak" class="white-text modal-trigger waves-effect waves-light btn red lighten-2"><i class="material-icons left">close</i>Tolak</a>
                         <div id="modal<?php echo $row->id ?>tolak" class="modal">
                           <div class="modal-content">
                             <h4>Tolak Video</h4>

@@ -47,22 +47,30 @@
             <div class="row">
               <div class="col l12 s12">
                 <div class="card">
+                  <div class="card-content">
+                    <div class="chip">
+                      <img src="<?php echo base_url(); ?>assets/img/profile.jpg" alt="Contact Person">
+                      <?php echo $this->session->userdata('login')['firstname'].$this->session->userdata('login')['lastname'] ?>
+                    </div>
+                    <div class="chip">
+                      <?php if($row->approved_status == 'ACCEPTED'){ ?>
+                        <p class="green-text"><b>DITERIMA</b></p>
+                      <?php }else if($row->approved_status == 'DECLINED'){ ?>
+                        <p class="red-text"><b>DITOLAK</b> Oleh : <?php echo $row->email ?></p>
+                      <?php }else{ ?>
+                        <p class="orange-text"><b>MENUNGGU</b></p>
+                      <?php } ?>
+                    </div>
+                    <i class="material-icons right activator">more_vert</i>
+                  </div>
                   <div class="card-image">
                     <video class="responsive-video" controls>
                       <source src="<?php echo base_url().$row->video_link; ?>">
                     </video>
                   </div>
-                  <div class="card-content">
+                  <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Informasi<i class="material-icons right">close</i></span>
                     <div class="row">
-                      <div class="col s12">
-                        <?php if($row->approved_status == 'ACCEPTED'){ ?>
-                          <p>Status Video : <b class="green-text">DITERIMA</b> Oleh : <?php echo $row->email ?></p>
-                        <?php }else if($row->approved_status == 'DECLINED'){ ?>
-                          <p class="red-text"><b>DITOLAK</b> Oleh : <?php echo $row->email ?></p>
-                        <?php }else{ ?>
-                          <p class="orange-text"><b>MENUNGGU</b></p>
-                        <?php } ?>
-                      </div>
                       <div class="col s12">
                         <p>Di unggah pada : <b><?php echo $row->upload_time ?></b></p>
                       </div>
@@ -71,21 +79,19 @@
                       </div>
                     </div>
                   </div>
-                  <div class="card-action grey lighten-2">
-                    <div class="row" style="margin-top:-50px">
-                      <a href="#modal<?php echo $row->id ?>delete" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">delete</i></a>
-                      <div id="modal<?php echo $row->id ?>delete" class="modal">
-                        <div class="modal-content">
-                          <h4>Hapus Video</h4>
-                          <div class="row">
-                            <div class="col l12 s12">
-                              <p>Yakin Hapus Video Ini ?</p>
-                            </div>
+                  <div class="card-action grey lighten-2 center">
+                    <a href="#modal<?php echo $row->id ?>delete" class="orange-text modal-trigger btn-flat waves-effect waves-light"><i class="material-icons">delete</i>Hapus Video</a>
+                    <div id="modal<?php echo $row->id ?>delete" class="modal">
+                      <div class="modal-content">
+                        <h4>Hapus Video</h4>
+                        <div class="row">
+                          <div class="col l12 s12">
+                            <p>Yakin Hapus Video Ini ?</p>
                           </div>
                         </div>
-                        <div class="modal-footer">
-                          <button onclick="deleteVideo(<?php echo $row->id ?>)" class=" modal-action modal-close waves-effect waves-red btn-flat">Hapus</button>
-                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button onclick="deleteVideo(<?php echo $row->id ?>)" class=" modal-action modal-close waves-effect waves-red btn-flat">Hapus</button>
                       </div>
                     </div>
                   </div>
