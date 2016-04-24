@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('Asia/Jakarta');
 class Video_Model extends CI_Model{
   function __construct(){
     parent::__construct();
@@ -13,7 +13,7 @@ class Video_Model extends CI_Model{
     }
   }
   function getAllVideoById($userId){
-    $query = $this->db->order_by('upload_time', 'DESC')->get_where('vw_user_video', array('id_user' => $userId));
+    $query = $this->db->order_by('id', 'DESC')->get_where('vw_user_video', array('id_user' => $userId));
     if ($query->num_rows() > 0){
       return $query->result();
     }else{
@@ -49,13 +49,20 @@ class Video_Model extends CI_Model{
   }
 
   function countVideoUploadedToday(){
-    $today = date('Y-m-d h:i:s', time());
-    $query = $this->db->get_where('video', array('upload_time' => $today));
+    $startTime = date('Y-m-d 00:00:00');
+    $now = date('Y-m-d H:i:s',time());
+    $sql = "SELECT * FROM `video` WHERE `upload_time` BETWEEN '$startTime' AND '$now'";
+    $query = $this->db->query($sql);
     return $query->num_rows();
   }
 
   function countTotalVideo(){
     $query = $this->db->get('video');
+    return $query->num_rows();
+  }
+
+  function countTotalVideoById($userId){
+    $query = $this->db->get_where('video',array('id_user' => $userId));
     return $query->num_rows();
   }
 
@@ -66,6 +73,21 @@ class Video_Model extends CI_Model{
 
   function countTotalVideoDec(){
     $query = $this->db->get('vw_dec_video');
+    return $query->num_rows();
+  }
+
+  function countTotalVideoAccById($idUser){
+    $query = $this->db->get_where('vw_acc_video', array('id_user' => $idUser));
+    return $query->num_rows();
+  }
+
+  function countTotalVideoDecById($idUser){
+    $query = $this->db->get_where('vw_dec_video', array('id_user' => $idUser));
+    return $query->num_rows();
+  }
+
+  function countTotalVideoNew(){
+    $query = $this->db->get('vw_new_video');
     return $query->num_rows();
   }
 

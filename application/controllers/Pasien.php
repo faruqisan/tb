@@ -7,21 +7,26 @@ class Pasien extends CI_Controller{
       redirect('Login');
 		}
     $this->load->Model('Video_Model');
+    $this->load->Model('Video_Comment_Model');
   }
   public function index(){
-    $this->load->view('Pasien/index.php');
+    $data['userAccVideo'] = $this->Video_Model->countTotalVideoAccById($this->session->userdata('login')['id']);
+    $data['userDecVideo'] = $this->Video_Model->countTotalVideoDecById($this->session->userdata('login')['id']);
+    $data['userVideo'] = $this->Video_Model->countTotalVideoById($this->session->userdata('login')['id']);
+    $data['anotherUserVideo'] = $this->Video_Model->getAllAcceptedVideo();
+    $this->load->view('Pasien/index.php',$data);
   }
   public function profile(){
     $data['listUserVideo'] = $this->Video_Model->getAllVideoById($this->session->userdata('login')['id']);
     $this->load->view('Pasien/profile.php',$data);
   }
   public function submitVideo(){
-    $date= date('Y-m-d h:i:s', time());
+    $date= date('Y-m-d H:i:s', time());
     $uploaderId = $this->session->userdata('login')['id'];
     $uploaderEmail = $this->session->userdata('login')['email'];
     $path = "./video/".$uploaderEmail."/";
     $config['upload_path']= $path;
-    $config['allowed_types'] = 'mp4';
+    $config['allowed_types'] = 'mp4|mov|flv';
     if (!is_dir($path)) {
       mkdir($path, 0777,true);
     }else{
@@ -55,5 +60,21 @@ class Pasien extends CI_Controller{
 		header("Content-Type: application/json");
 		echo json_encode($response);
   }
+
+  public function submitComment(){
+    $idVideo = $this->input->post('id');
+    $comment = $this->input->post('comment');
+		$result = $this->Video_Comment_Model->submitComment($idVideo,$comment);
+    $response = array('status'=>$result);
+		header("Content-Type: application/json");
+		echo json_encode($response);
+  }
+
+  public function getComment($videoId){
+    $comment = $this->Video_Comment_Model->getComment($videoId);
+    header("Content-Type: application/json");
+		echo json_encode($comment);
+  }
+
 }
 ?>

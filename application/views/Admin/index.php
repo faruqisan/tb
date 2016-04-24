@@ -39,13 +39,32 @@
       </div>
     </header>
     <main>
-      Video Today<?php echo $videoToday; ?>
-      <br>
-      Total Uploaded Video <?php echo $totalVideo; ?>
-      <br>
-      Accepted Video <?php echo $accVideo; ?>
-      <br>
-      Declined Video<?php echo $decVideo; ?>
+      <div class="container">
+        <div class="row">
+          <div class="col l12 s12">
+            <table class="bordered">
+              <thead>
+                <tr>
+                  <th>Hari Ini</th>
+                  <th>Baru</th>
+                  <th>Diterima</th>
+                  <th>Ditolak</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><?php echo $videoToday; ?></td>
+                  <td><a href="<?php echo base_url('Admin'); ?>/newVideo"><?php echo $newVideo; ?></a></td>
+                  <td><a href="<?php echo base_url('Admin'); ?>/acceptedVideo"><?php echo $accVideo; ?></a></td>
+                  <td><a href="<?php echo base_url('Admin'); ?>/declinedVideo"><?php echo $decVideo; ?></a></td>
+                  <td><?php echo $totalVideo; ?></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-2.2.3.min.js"></script>

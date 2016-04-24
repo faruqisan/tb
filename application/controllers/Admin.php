@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('Asia/Jakarta');
 class Admin extends CI_Controller{
   function __construct(){
     parent::__construct();
@@ -13,8 +13,10 @@ class Admin extends CI_Controller{
     $data['totalVideo'] = $this->Video_Model->countTotalVideo();
     $data['accVideo'] = $this->Video_Model->countTotalVideoAcc();
     $data['decVideo'] = $this->Video_Model->countTotalVideoDec();
+    $data['newVideo'] = $this->Video_Model->countTotalVideoNew();
     $this->load->view('Admin/index.php',$data);
   }
+
   function newVideo(){
     $data['unApprovedVideo'] = $this->Video_Model->getAllUnApprovedVideo();
     $this->load->view('Admin/NewVideo.php',$data);

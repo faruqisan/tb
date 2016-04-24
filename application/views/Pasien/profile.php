@@ -47,6 +47,11 @@
             <div class="row">
               <div class="col l12 s12">
                 <div class="card">
+                  <div class="card-image">
+                    <video class="responsive-video" controls>
+                      <source src="<?php echo base_url().$row->video_link; ?>">
+                    </video>
+                  </div>
                   <div class="card-content">
                     <div class="row">
                       <div class="col s12">
@@ -54,6 +59,8 @@
                           <p>Status Video : <b class="green-text">DITERIMA</b> Oleh : <?php echo $row->email ?></p>
                         <?php }else if($row->approved_status == 'DECLINED'){ ?>
                           <p class="red-text"><b>DITOLAK</b> Oleh : <?php echo $row->email ?></p>
+                        <?php }else{ ?>
+                          <p class="orange-text"><b>MENUNGGU</b></p>
                         <?php } ?>
                       </div>
                       <div class="col s12">
@@ -61,13 +68,6 @@
                       </div>
                       <div class="col s12">
                         <p>Keterangan : <b><?php echo $row->keterangan ?></b></p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col l12 s12">
-                        <video controls style="width:100% !important;height:auto !important;">
-                          <source src="<?php echo base_url().$row->video_link; ?>" type="video/mp4">
-                        </video>
                       </div>
                     </div>
                   </div>
