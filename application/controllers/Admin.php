@@ -7,6 +7,7 @@ class Admin extends CI_Controller{
       redirect('Login');
 		}
     $this->load->Model('Video_Model');
+    $this->load->Model('Pasien_Model');
   }
   function index(){
     $data['videoToday'] = $this->Video_Model->countVideoUploadedToday();
@@ -14,6 +15,9 @@ class Admin extends CI_Controller{
     $data['accVideo'] = $this->Video_Model->countTotalVideoAcc();
     $data['decVideo'] = $this->Video_Model->countTotalVideoDec();
     $data['newVideo'] = $this->Video_Model->countTotalVideoNew();
+
+    $data['totalPasien'] = $this->Pasien_Model->countTotalPasien();
+
     $this->load->view('Admin/index.php',$data);
   }
 

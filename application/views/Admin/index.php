@@ -42,26 +42,129 @@
       <div class="container">
         <div class="row">
           <div class="col l12 s12">
-            <table class="bordered">
-              <thead>
-                <tr>
-                  <th>Hari Ini</th>
-                  <th>Baru</th>
-                  <th>Diterima</th>
-                  <th>Ditolak</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><?php echo $videoToday; ?></td>
-                  <td><a href="<?php echo base_url('Admin'); ?>/newVideo"><?php echo $newVideo; ?></a></td>
-                  <td><a href="<?php echo base_url('Admin'); ?>/acceptedVideo"><?php echo $accVideo; ?></a></td>
-                  <td><a href="<?php echo base_url('Admin'); ?>/declinedVideo"><?php echo $decVideo; ?></a></td>
-                  <td><?php echo $totalVideo; ?></td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Video</span>
+              </div>
+              <div class="card-action grey lighten-2">
+                <div class="row" style="margin-top:-50px;height:5px">
+                  <div class="col l12 s12">
+                    <a href="#modalVideoInformation" class="modal-trigger btn-floating btn-large waves-effect waves-light right"><i class="material-icons">more_vert</i></a>
+                    <div id="modalVideoInformation" class="modal modal-fixed-footer">
+                      <div class="modal-content">
+                        <div class="row">
+                          <div class="col l12 s12">
+                            <h5>Informasi Video</h5>
+                            <div class="divider"></div>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>Hari Ini</td>
+                                  <td><?php echo $videoToday; ?></td>
+                                </tr>
+                                <tr>
+                                  <td>Baru</td>
+                                  <td><a href="<?php echo base_url('Admin'); ?>/newVideo"><?php echo $newVideo; ?></a></td>
+                                </tr>
+                                <tr>
+                                  <td>Diterima</td>
+                                  <td><a href="<?php echo base_url('Admin'); ?>/acceptedVideo"><?php echo $accVideo; ?></a></td>
+                                </tr>
+                                <tr>
+                                  <td>Ditolak</td>
+                                  <td><a href="<?php echo base_url('Admin'); ?>/declinedVideo"><?php echo $decVideo; ?></a></td>
+                                </tr>
+                                <tr>
+                                  <td>Total</td>
+                                  <td><?php echo $totalVideo; ?></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Tutup</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l12 s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Pasien</span>
+              </div>
+              <div class="card-action grey lighten-2">
+                <div class="row" style="margin-top:-50px;height:5px">
+                  <div class="col l12 s12">
+                    <a href="#modalPasienInformation" class="modal-trigger btn-floating btn-large waves-effect waves-light right"><i class="material-icons">more_vert</i></a>
+                    <div id="modalPasienInformation" class="modal modal-fixed-footer">
+                      <div class="modal-content">
+                        <div class="row">
+                          <div class="col l12 s12">
+                            <h5>Informasi Pasien</h5>
+                            <div class="divider"></div>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>Pasien</td>
+                                  <td><?php echo $totalPasien; ?></tr>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Tutup</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l12 s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Dokter</span>
+              </div>
+              <div class="card-action grey lighten-2">
+                <div class="row" style="margin-top:-50px;height:5px">
+                  <div class="col l12 s12">
+                    <a href="#modalDokterInformation" class="modal-trigger btn-floating btn-large waves-effect waves-light right"><i class="material-icons">more_vert</i></a>
+                    <div id="modalDokterInformation" class="modal modal-fixed-footer">
+                      <div class="modal-content">
+                        <div class="row">
+                          <div class="col l12 s12">
+                            <h5>Informasi Dokter</h5>
+                            <div class="divider"></div>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <td>Pasien</td>
+                                  <td><?php echo $totalPasien; ?></tr>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Tutup</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
