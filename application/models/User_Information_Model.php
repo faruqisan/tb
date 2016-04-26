@@ -12,6 +12,22 @@ class User_Information_Model extends CI_Model{
         return false;
     }
   }
+  function createUserInformation($idUser,$firstName,$lastName,$dob,$address,$phone){
+    $data = array(
+      'id_user'=> $idUser,
+      'firstname'=> $firstName,
+      'lastname'=>$lastName,
+      'dob'=>$dob,
+      'address'=>$address,
+      'phone'=>$phone
+    );
+    $this->db->insert('user_information',$data);
+    if ($this->db->affected_rows() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+  }
 }
 
 ?>

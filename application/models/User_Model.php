@@ -52,6 +52,12 @@ class User_Model extends CI_Model{
 
   }
 
+  function getLatestIdForUser(){
+    $sql = "SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'tb' AND TABLE_NAME = 'user'";
+    $query = $this->db->query($sql);
+    return $query->result();
+  }
+
 
 }
 

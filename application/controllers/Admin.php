@@ -8,6 +8,8 @@ class Admin extends CI_Controller{
 		}
     $this->load->Model('Video_Model');
     $this->load->Model('Pasien_Model');
+    $this->load->Model('User_Model');
+    $this->load->Model('User_Information_Model');
   }
   function index(){
     $data['videoToday'] = $this->Video_Model->countVideoUploadedToday();
@@ -17,7 +19,7 @@ class Admin extends CI_Controller{
     $data['newVideo'] = $this->Video_Model->countTotalVideoNew();
 
     $data['totalPasien'] = $this->Pasien_Model->countTotalPasien();
-
+    $data['listPasien'] = $this->Pasien_Model->getPasienList();
     $this->load->view('Admin/index.php',$data);
   }
 
@@ -55,6 +57,32 @@ class Admin extends CI_Controller{
 
 		header("Content-Type: application/json");
 		echo json_encode($response);
+  }
+
+  function registerUser(){
+    $privilage = $this->input->post('privilage');
+    $email = $this->input->post('email');
+    $password = $this->input->post('password');
+
+    $latestUserId = $this->User_Model->getLatestIdForUser();
+    $latestUserId = $latestUserId[0]->AUTO_INCREMENT;
+    $firstname = $this->input->post('firstname');
+    $lastname = $this->input->post('lastname');
+    $phone = $this->input->post('phone');
+    $dob = $this->input->post('dob');
+    $address = $this->input->post('address');
+
+    $crateUser = $this->User_Model->createUser($email,$password,$privilage);
+    $createUserInformation = $this->User_Information_Model->createUserInformation($latestUserId,$firstname,$lastname,$dob,$address,$phone);
+
+    if($createUser == true || $createUserInformation == true){
+      $this->session->set_flashdata('registerResult','Registrasi User '.$email.' Berhasil');
+			redirect('/Admin');
+    }else{
+      $this->session->set_flashdata('registerResult','Registrasi User '.$email.' Gagal');
+			redirect('/Admin');
+    }
+
   }
 
 }

@@ -14,6 +14,9 @@ class Login extends CI_Controller{
         case 'Pasien':
           redirect('Pasien');
           break;
+        case 'Admin':
+          redirect('Admin');
+          break;
         default:
           # code...
           break;
