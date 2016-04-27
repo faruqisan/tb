@@ -41,7 +41,7 @@
         <?php if($anotherUserVideo!=null){ ?>
           <?php foreach($anotherUserVideo as $row){ ?>
             <div class="row">
-              <div class="col l12 s12">
+              <div class="col l12 s12" style="padding:0px">
                 <div class="card">
                   <div class="card-content">
                     <div class="chip">
@@ -113,9 +113,35 @@
           <i class="large material-icons">menu</i>
         </a>
         <ul>
+          <li><a href="#modalChat" class="modal-trigger btn-floating blue darken-1"><i class="material-icons">chat</i></a></li>
           <li><a href="#modalVideo" class="modal-trigger btn-floating yellow darken-1"><i class="material-icons">videocam</i></a></li>
         </ul>
       </div>
+      <div id="modalChat" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <div class="row">
+            <div class="col l12 s12" style="padding:0px">
+              <h4>Chat Dokter</h4>
+              <ul class="collection">
+                <?php foreach($listDokter as $row){ ?>
+                  <li class="collection-item avatar">
+                    <i class="material-icons circle green">local_hospital</i>
+                    <span class="title"><b><?php echo ucfirst($row->firstname).' '.ucfirst($row->lastname); ?></b></span>
+                    <p>
+                       <?php echo $row->email;?>
+                    </p>
+                    <a href="<?php echo base_url('Pasien/chat').'/'.$row->id; ?>" class="secondary-content"><i class="material-icons">chat</i></a>
+                  </li>
+                <?php } ?>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Tutup</a>
+        </div>
+      </div>
+
       <div id="modalVideo" class="modal bottom-sheet">
         <form action="Pasien/submitVideo" method="post" enctype="multipart/form-data">
           <div class="modal-content">

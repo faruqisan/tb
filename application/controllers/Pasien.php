@@ -8,17 +8,26 @@ class Pasien extends CI_Controller{
 		}
     $this->load->Model('Video_Model');
     $this->load->Model('Video_Comment_Model');
+    $this->load->Model('Dokter_Model');
+    $this->load->Model('Chat_Model');
   }
   public function index(){
     $data['userAccVideo'] = $this->Video_Model->countTotalVideoAccById($this->session->userdata('login')['id']);
     $data['userDecVideo'] = $this->Video_Model->countTotalVideoDecById($this->session->userdata('login')['id']);
     $data['userVideo'] = $this->Video_Model->countTotalVideoById($this->session->userdata('login')['id']);
     $data['anotherUserVideo'] = $this->Video_Model->getAllAcceptedVideo();
+
+    $data['listDokter'] = $this->Dokter_Model->getDokterList();
     $this->load->view('Pasien/index.php',$data);
   }
   public function profile(){
     $data['listUserVideo'] = $this->Video_Model->getAllVideoById($this->session->userdata('login')['id']);
+    $data['listDokter'] = $this->Dokter_Model->getDokterList();
     $this->load->view('Pasien/profile.php',$data);
+  }
+  public function chat($idDokter){
+    $data['chat'] = $this->Chat_Model->getChat($this->session->userdata('login')['id'],$idDokter);
+    $this->load->view('Pasien/Chat.php',$data);
   }
   public function submitVideo(){
     $date= date('Y-m-d H:i:s', time());
