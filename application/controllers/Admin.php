@@ -8,6 +8,7 @@ class Admin extends CI_Controller{
 		}
     $this->load->Model('Video_Model');
     $this->load->Model('Pasien_Model');
+    $this->load->Model('Dokter_Model');
     $this->load->Model('User_Model');
     $this->load->Model('User_Information_Model');
   }
@@ -20,6 +21,10 @@ class Admin extends CI_Controller{
 
     $data['totalPasien'] = $this->Pasien_Model->countTotalPasien();
     $data['listPasien'] = $this->Pasien_Model->getPasienList();
+
+    $data['totalDokter'] = $this->Dokter_Model->countTotalDokter();
+    $data['listDokter'] = $this->Dokter_Model->getDokterList();
+
     $this->load->view('Admin/index.php',$data);
   }
 

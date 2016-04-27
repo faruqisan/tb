@@ -29,13 +29,13 @@
         </div>
       </div>
       <div class="section red lighten-2">
-        <div class="row">
+        <div class="row"style="margin-top:-115px">
           <div class="col l4 s12 offset-l4" >
-            <div class="card hoverable"style="margin-top:-100px">
+            <div class="card hoverable">
               <form action="Login/doLogin" method="post">
                 <div class="card-content center">
                   <!-- go to down button -->
-                  <button onclick="scroll(loginCard)" onmouseover="setOpacity(1)" onmouseout="setOpacity(0.6)" class="btn-floating btn-large waves-effect waves-light grey lighten-2" type="button" id="downArrow" style="margin-top:-50px;opacity:0.6">
+                  <button onclick="scroll(loginCard)" onmouseover="setOpacity(1)" onmouseout="setOpacity(0.6)" class="btn-floating btn-large waves-effect waves-light grey lighten-2" type="button" id="downArrow" style="margin-top:-65px;opacity:0.6">
                     <i class="material-icons black-text">keyboard_arrow_down</i>
                   </button>
                   <h4 class="center-align">Silahkan Masuk</h4>

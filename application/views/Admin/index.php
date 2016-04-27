@@ -45,7 +45,7 @@
           <ul class="tabs">
             <li class="tab col s3"><a href="#tabVideo">Video</a></li>
             <li class="tab col s3"><a class="active" href="#tabPasien">Pasien</a></li>
-            <li class="tab col s3 disabled"><a href="#test3">Dokter</a></li>
+            <li class="tab col s3"><a href="#tabDokter">Dokter</a></li>
           </ul>
         </div>
         <div id="tabVideo" class="col s12">
@@ -124,7 +124,48 @@
             </div>
           </div>
         </div>
-        <div id="test3" class="col s12">Test 3</div>
+        <div id="tabDokter" class="col s12">
+          <div class="container">
+            <div class="row">
+              <div class="col l12 s12">
+                <h5 class="center-align">Informasi Dokter</h5>
+                <div class="divider"></div>
+                <table class="bordered striped">
+                  <tbody>
+                    <tr>
+                      <td>Jumlah Dokter</td>
+                      <td><b><?php echo $totalDokter." "; ?></b>Orang</tr>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col l12 s12">
+                <table class="bordered striped responsive-table">
+                  <thead>
+                    <tr>
+                      <th>Email</th>
+                      <th>Nama</th>
+                      <th>Tanggal Lahir</th>
+                      <th>No. HP</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($listDokter as $row) { ?>
+                      <tr>
+                        <td><?php echo $row->email ?></td>
+                        <td><?php echo $row->firstname." ".$row->lastname ?></td>
+                        <td><?php echo $row->dob ?></td>
+                        <td><?php echo $row->phone ?></td>
+                      </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
         <a class="btn-floating btn-large blue lighten-2">
@@ -171,8 +212,8 @@
               </div>
             </div>
             <div class="row">
-              <div class="col l12 s12">
-                <input type="phone" id="phone" name="phone" required="">
+              <div class="input-field col l12 s12">
+                <input type="text" id="phone" name="phone" required="">
                 <label for="phone">Nomor Handphone</label>
               </div>
             </div>
@@ -207,7 +248,6 @@
     <?php $registerResult=$this->session->flashdata('registerResult'); ?>
     <?php if(isset($registerResult)) {?>
       <script type="text/javascript">
-        //alert("<?php echo $this->session->flashdata('uploadResult'); ?>");
         Materialize.toast('<?php echo $this->session->flashdata('registerResult'); ?>', 4000);
       </script>
     <?php } ?>
