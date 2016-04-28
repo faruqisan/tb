@@ -27,6 +27,8 @@ class Pasien extends CI_Controller{
   }
   public function chat($idDokter){
     $data['chat'] = $this->Chat_Model->getChat($this->session->userdata('login')['id'],$idDokter);
+    $data['dataDokter'] = $this->Dokter_Model->getDokterById($idDokter);
+    $data['idPasien'] = $idDokter;
     $this->load->view('Pasien/Chat.php',$data);
   }
   public function submitVideo(){
@@ -83,6 +85,16 @@ class Pasien extends CI_Controller{
     $comment = $this->Video_Comment_Model->getComment($videoId);
     header("Content-Type: application/json");
 		echo json_encode($comment);
+  }
+
+  public function sendChat(){
+    $senderId = $this->session->userdata('login')['id'];
+    $receiverId = $this->input->post('receiver');
+    $chat = $this->input->post('chat');
+    $result = $this->Chat_Model->insertChat($senderId,$receiverId,$chat);
+    $response = array('status'=>$result);
+		header("Content-Type: application/json");
+		echo json_encode($response);
   }
 
 }

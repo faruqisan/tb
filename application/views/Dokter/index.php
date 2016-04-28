@@ -39,7 +39,7 @@
         </nav>
       </div>
     </header>
-    <main>
+    <section id="main">
       <div class="row">
         <div class="col s12" style="padding:0px">
           <ul class="tabs">
@@ -124,7 +124,39 @@
           </div>
         </div>
       </div>
-    </main>
+      <div class="fixed-action-btn horizontal" style="bottom: 15px; right: 15px;">
+        <a class="btn-floating btn-large teal">
+          <i class="large material-icons">menu</i>
+        </a>
+        <ul>
+          <li><a href="#modalChats" class="modal-trigger btn-floating blue darken-1"><i class="material-icons">chat</i></a></li>
+        </ul>
+      </div>
+      <div id="modalChats" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <div class="row">
+            <div class="col l12 s12" style="padding:0px">
+              <h4>Chat Dokter</h4>
+              <ul class="collection">
+                <?php foreach($listPasien as $row){ ?>
+                  <li class="collection-item avatar">
+                    <i class="material-icons circle green">account_circle</i>
+                    <span class="title"><b><?php echo ucfirst($row->firstname).' '.ucfirst($row->lastname); ?></b></span>
+                    <p>
+                       <?php echo $row->email;?>
+                    </p>
+                    <a href="<?php echo base_url('Dokter/chat').'/'.$row->id; ?>" class="secondary-content"><i class="material-icons">chat</i></a>
+                  </li>
+                <?php } ?>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Tutup</a>
+        </div>
+      </div>
+    </section>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/materialize.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/adminCustom.js"></script>

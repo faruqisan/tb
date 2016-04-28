@@ -39,7 +39,7 @@
         </nav>
       </div>
     </header>
-    <main>
+    <section id="main">
       <div class="row">
         <div class="col l12 s12">
           <h4 class="center-align">Video Diterima</h4>
@@ -103,7 +103,7 @@
           <h5 class="center-align">Belum Ada Video Diterima</h5>
         <?php } ?>
       </div>
-    </main>
+    </section>
 
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/materialize.min.js"></script>

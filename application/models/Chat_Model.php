@@ -18,7 +18,10 @@ class Chat_Model extends CI_Model{
     }
   }
   function getChat($userId,$receiverId){
-    $query = $this->db->get_where('chat',array('sender_id' => $userId,'receiver_id'=>$receiverId));
+    $this->db->where('sender_id =', $userId);
+    $this->db->or_where('sender_id =', $receiverId);
+    $query = $this->db->get('chat');
+    //$query = "SELECT * FROM `chat` WHERE `sender_id` = '$userId' OR `sender_id` ='$receiverId'";
     if ($query->num_rows() > 0){
       return $query->result();
     }else{

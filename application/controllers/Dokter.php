@@ -7,6 +7,7 @@ class Dokter extends CI_Controller{
 		}
     $this->load->Model('Video_Model');
     $this->load->Model('Pasien_Model');
+    $this->load->Model('Chat_Model');
   }
   function index(){
     $data['videoToday'] = $this->Video_Model->countVideoUploadedToday();
@@ -19,6 +20,24 @@ class Dokter extends CI_Controller{
     $data['listPasien'] = $this->Pasien_Model->getPasienList();
 
     $this->load->view('Dokter/index.php',$data);
+  }
+
+  function chat($idPasien){
+    $data['chat'] = $this->Chat_Model->getChat($this->session->userdata('login')['id'],$idPasien);
+    $data['dataDokter'] = $this->Pasien_Model->getPasienById($idPasien);
+    $data['listPasien'] = $this->Pasien_Model->getPasienList();
+    $data['idPasien'] = $idPasien;
+    $this->load->view('Pasien/Chat.php',$data);
+  }
+
+  public function sendChat(){
+    $senderId = $this->session->userdata('login')['id'];
+    $receiverId = $this->input->post('receiver');
+    $chat = $this->input->post('chat');
+    $result = $this->Chat_Model->insertChat($senderId,$receiverId,$chat);
+    $response = array('status'=>$result);
+		header("Content-Type: application/json");
+		echo json_encode($response);
   }
 
   function newVideo(){

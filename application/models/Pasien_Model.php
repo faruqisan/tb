@@ -12,6 +12,12 @@ class Pasien_Model extends CI_Model{
     $query = $this->db->get('vw_pasien');
     return $query->num_rows();
   }
+
+  function getPasienById($id){
+    $query = $this->db->get_where('vw_pasien',array('id'=>$id));
+    return $query->result();
+  }
+
 }
 
 ?>

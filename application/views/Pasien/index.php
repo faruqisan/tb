@@ -35,7 +35,7 @@
         </nav>
       </div>
     </header>
-    <main>
+    <section id="main">
 
       <div class="container">
         <?php if($anotherUserVideo!=null){ ?>
@@ -148,7 +148,7 @@
             <div class="row">
               <h4 class="center">Upload Video</h4>
               <div class="input-field col l10 s10">
-                <input type="file" name="video">
+                <input type="file" accept="video/*" capture="camera" name="video">
               </div>
             </div>
           </div>
@@ -161,7 +161,7 @@
           </div>
         </form>
       </div>
-    </main>
+    </section>
 
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/materialize.min.js"></script>
