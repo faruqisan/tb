@@ -59,7 +59,7 @@
                            <?php echo $row->chat; ?>
                         </p>
                       </li>
-                  <?php }else if($row->sender_id == $idPasien){ ?>
+                  <?php }else if($row->sender_id == $idPasien&&$row->receiver_id==$this->session->userdata('login')['id']){ ?>
                       <li class="collection-item grey darken-1 white-text" style="margin-top:5px">
                         <!--<span class="title "><?php echo ucfirst($dataDokter[0]->firstname).' '.ucfirst($dataDokter[0]->lastname) ?></span>-->
                         <p class="left-align">
