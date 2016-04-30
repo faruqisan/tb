@@ -136,7 +136,7 @@
         <div class="modal-content">
           <div class="row">
             <div class="col l12 s12" style="padding:0px">
-              <h4>Chat Dokter</h4>
+              <h4>Chat Pasien</h4>
               <ul class="collection">
                 <?php foreach($listPasien as $row){ ?>
                   <li class="collection-item avatar">
