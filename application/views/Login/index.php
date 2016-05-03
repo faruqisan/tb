@@ -16,7 +16,7 @@
       <?php } ?>
     </header>
     <div class="parallax-container" style="height:100vh">
-        <div class="parallax" ><img src=""></div>
+        <div class="parallax" ><img src="<?php echo base_url(); ?>assets/img/tb_bg.jpg"></div>
         <div class="row">
           <div class="col l12 s12">
             <div class="row">
