@@ -16,13 +16,13 @@
       <?php } ?>
     </header>
     <div class="parallax-container" style="height:100vh">
-        <div class="parallax" ><img src="<?php echo base_url(); ?>assets/img/tb_bg.jpg"></div>
+        <div class="parallax" ><img src="<?php echo base_url(); ?>assets/img/tb_bg.png"></div>
         <div class="row">
           <div class="col l12 s12">
             <div class="row">
               <div class="col l12 s12">
-                <h1 class="center-align"><b>TB Smart</b></h1><br>
-                <h4 class="center-align" style="margin-top:-25px"><b>Mari Lawan Tuberkolosis</b></h4>
+                <h1 class="center-align grey-text"><b>TB Smart</b></h1><br>
+                <h4 class="center-align grey-text" style="margin-top:-25px"><b>Mari Lawan Tuberkolosis</b></h4>
               </div>
             </div>
           </div>

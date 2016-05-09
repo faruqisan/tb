@@ -32,37 +32,47 @@ class Pasien extends CI_Controller{
     $this->load->view('Pasien/Chat.php',$data);
   }
   public function submitVideo(){
-    $date= date('Y-m-d H:i:s', time());
-    $uploaderId = $this->session->userdata('login')['id'];
-    $uploaderEmail = $this->session->userdata('login')['email'];
-    $path = "./video/".$uploaderEmail."/";
-    $config['upload_path']= $path;
-    $config['allowed_types'] = 'mp4|mov|flv';
-    if (!is_dir($path)) {
-      mkdir($path, 0777,true);
-    }else{
-      $this->load->library('upload', $config);
-      if (!$this->upload->do_upload("video")) {
-        $this->session->set_flashdata('uploadResult','Video gagal di Upload');
-        redirect('Pasien');
-      }else {
-         //state jika berhasil
-         $upload_data = $this->upload->data();
-         $fileName = $upload_data['file_name'];
-         $data = array(
-           'id_user'=>$uploaderId,
-           'video_link'=>'video/'.$uploaderEmail.'/'.$fileName,
-           'upload_time'=>date('Y-m-d h:i:s', time())
-         );
-         $save = $this->Video_Model->insertVideo($data);
-         if($save != false){
-           $this->session->set_flashdata('uploadResult','Video Berhasil Di Upload');
-           redirect('Pasien/profile');
-         }else{
-           redirect('Pasien');
-         }
+    $time_now = date('H:i:s', time());
+    $time_start = date('06:00:00', time());
+    $time_end = date('10:00:00', time());
+
+    if($time_now>=$time_start && $time_now<=$time_end){
+      $date= date('Y-m-d H:i:s', time());
+      $uploaderId = $this->session->userdata('login')['id'];
+      $uploaderEmail = $this->session->userdata('login')['email'];
+      $path = "./video/".$uploaderEmail."/";
+      $config['upload_path']= $path;
+      $config['allowed_types'] = 'mp4|mov|flv';
+      if (!is_dir($path)) {
+        mkdir($path, 0777,true);
+      }else{
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload("video")) {
+          $this->session->set_flashdata('uploadResult','Video gagal di Upload');
+          redirect('Pasien');
+        }else {
+           //state jika berhasil
+           $upload_data = $this->upload->data();
+           $fileName = $upload_data['file_name'];
+           $data = array(
+             'id_user'=>$uploaderId,
+             'video_link'=>'video/'.$uploaderEmail.'/'.$fileName,
+             'upload_time'=>date('Y-m-d h:i:s', time())
+           );
+           $save = $this->Video_Model->insertVideo($data);
+           if($save != false){
+             $this->session->set_flashdata('uploadResult','Video Berhasil Di Upload');
+             redirect('Pasien/profile');
+           }else{
+             redirect('Pasien');
+           }
+        }
       }
+    }else{
+      $this->session->set_flashdata('uploadResult','Waktu upload video tidak diizinkan 6-10 pagi');
+      redirect('Pasien');
     }
+
   }
   public function deleteVideo(){
     $idVideo = $this->input->post('id');

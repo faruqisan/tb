@@ -146,16 +146,24 @@
         <form action="Pasien/submitVideo" method="post" enctype="multipart/form-data">
           <div class="modal-content">
             <div class="row">
-              <h4 class="center">Upload Video</h4>
-              <div class="input-field col l10 s10">
-                <input type="file" accept="video/*" capture="camera" name="video">
+              <blockquote>
+                Maksimal durasi video 10 detik<br>Upload di jam 6 - 10 pagi
+              </blockquote>
+              <div class="file-field input-field col l12 s12">
+                <div class="btn">
+                  <span><i class="material-icons">videocam</i></span>
+                  <input type="file" accept="video/*" capture="camera" name="video">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="Rekam Video, atau pilih dari penyimpanan">
+                </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
             <div class="row">
               <div class="col l12 s12">
-                <button type="submit" name="action" class="btn modal-action modal-close waves-effect waves-green">Upload</button>
+                <button type="submit" name="action" class="btn modal-action modal-close waves-effect waves-green teal-text"><i class="material-icons">file_upload</i></button>
               </div>
             </div>
           </div>
