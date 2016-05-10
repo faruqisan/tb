@@ -46,7 +46,7 @@
         <?php if($listUserVideo!=null){ ?>
           <?php foreach($listUserVideo as $row){ ?>
             <div class="row">
-              <div class="col l12 s12">
+              <div class="col l12 s12" style="padding:0px">
                 <div class="card">
                   <div class="card-content">
                     <div class="chip">
@@ -80,7 +80,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="card-action grey lighten-2 center">
+                  <div class="card-action center">
                     <a href="#modal<?php echo $row->id ?>delete" class="orange-text modal-trigger btn-flat waves-effect waves-light"><i class="material-icons">delete</i>Hapus Video</a>
                     <div id="modal<?php echo $row->id ?>delete" class="modal">
                       <div class="modal-content">
@@ -115,7 +115,7 @@
           <li><a href="#modalVideo" class="modal-trigger btn-floating yellow darken-1"><i class="material-icons">videocam</i></a></li>
         </ul>
       </div>
-      <div id="modalChat" class="modal modal-fixed-footer">
+      <div id="modalChat" class="modal modal-fixed-footer" style="width:100%">
         <div class="modal-content">
           <div class="row">
             <div class="col l12 s12" style="padding:0px">
@@ -145,15 +145,23 @@
         <?php echo form_open('Pasien/submitVideo', $attributes); ?>
         <!--<form action="submitVideo" method="post" enctype="multipart/form-data">-->
           <div class="modal-content">
-            <div class="row">
-              <h4 class="center">Upload Video</h4>
-              <div class="input-field col l10 s10">
-                <input type="file" accept="video/*" capture="camera" name="video">
+            <div class="row" style="margin-top:-25px">
+              <div class="file-field input-field col l12 s12">
+                <blockquote>
+                  Maksimal durasi video 10 detik<br>Upload di jam 6 - 10 pagi
+                </blockquote>
+                <div class="btn">
+                  <span><i class="material-icons">videocam</i></span>
+                  <input type="file" accept="video/*" capture="camera" name="video">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="Rekam Video, atau pilih dari penyimpanan">
+                </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <div class="row">
+            <div class="row" style="margin-top:-20px">
               <div class="col l12 s12">
                 <button type="submit" name="action" class="btn modal-action modal-close waves-effect waves-green">Upload</button>
               </div>

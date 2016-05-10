@@ -55,7 +55,7 @@
                       <source src="<?php echo base_url().$row->video_link; ?>">
                     </video>
                   </div>
-                  <div class="card-reveal grey lighten-2">
+                  <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Informasi<i class="material-icons right">close</i></span>
                     <div class="row">
                       <div class="col s12">
@@ -68,12 +68,9 @@
                   </div>
                   <div class="card-action">
                     <div class="row">
-
-                    </div>
-                    <div class="row">
                       <div class="col l6 s12">
-                        <a onclick="loadComment(<?php echo $row->id ?>);" class="waves-effect waves-light btn-flat modal-trigger" href="#modalViewKomentar<?php echo $row->id ?>"><i class="material-icons left">pageview</i>Lihat Komentar</a>
-                        <div id="modalViewKomentar<?php echo $row->id ?>" class="modal">
+                        <a onclick="loadComment(<?php echo $row->id ?>);" class="waves-effect waves-light btn-flat modal-trigger black-text" href="#modalViewKomentar<?php echo $row->id ?>"><i class="material-icons left">pageview</i>Lihat Komentar</a>
+                        <div id="modalViewKomentar<?php echo $row->id ?>" class="modal" style="width:100%">
                           <div class="modal-content">
                             <h4>List Komentar</h4>
                             <ul class="collection" id="modalCommentContent<?php echo $row->id ?>">
@@ -85,14 +82,14 @@
                         </div>
                       </div>
                       <div class="col l6 s12">
-                        <a class="waves-effect waves-light btn-flat modal-trigger" href="#modalKomentar<?php echo $row->id ?>"><i class="material-icons left">comment</i>Tambahkan Komentar</a>
+                        <a class="waves-effect waves-light btn-flat modal-trigger black-text" href="#modalKomentar<?php echo $row->id ?>"><i class="material-icons left">comment</i>Tambahkan Komentar</a>
                         <div id="modalKomentar<?php echo $row->id ?>" class="modal bottom-sheet">
                           <div class="modal-content">
                             <h5>Tambahkan Komentar Anda</h5>
                             <textarea id="textarea<?php echo $row->id ?>" class="materialize-textarea" length="120"></textarea>
                             <label for="textarea<?php echo $row->id ?>">Komentar</label>
                           </div>
-                          <div class="modal-footer">
+                          <div class="modal-footer" >
                             <button onclick="submitKomentar(<?php echo $row->id ?>)" class=" modal-action modal-close waves-effect waves-green btn-flat">Kirim</button>
                           </div>
                         </div>
@@ -117,7 +114,7 @@
           <li><a href="#modalVideo" class="modal-trigger btn-floating yellow darken-1"><i class="material-icons">videocam</i></a></li>
         </ul>
       </div>
-      <div id="modalChat" class="modal modal-fixed-footer">
+      <div id="modalChat" class="modal modal-fixed-footer" style="width:100%">
         <div class="modal-content">
           <div class="row">
             <div class="col l12 s12" style="padding:0px">
@@ -145,11 +142,11 @@
       <div id="modalVideo" class="modal bottom-sheet">
         <form action="Pasien/submitVideo" method="post" enctype="multipart/form-data">
           <div class="modal-content">
-            <div class="row">
-              <blockquote>
-                Maksimal durasi video 10 detik<br>Upload di jam 6 - 10 pagi
-              </blockquote>
+            <div class="row" style="margin-top:-25px">
               <div class="file-field input-field col l12 s12">
+                <blockquote>
+                  Maksimal durasi video 10 detik<br>Upload di jam 6 - 10 pagi
+                </blockquote>
                 <div class="btn">
                   <span><i class="material-icons">videocam</i></span>
                   <input type="file" accept="video/*" capture="camera" name="video">
@@ -160,10 +157,10 @@
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <div class="row">
+          <div class="modal-footer" >
+            <div class="row" style="margin-top:-20px">
               <div class="col l12 s12">
-                <button type="submit" name="action" class="btn modal-action modal-close waves-effect waves-green teal-text"><i class="material-icons">file_upload</i></button>
+                <button type="submit" name="action" class="btn modal-action modal-close waves-effect waves-green">Upload</button>
               </div>
             </div>
           </div>
